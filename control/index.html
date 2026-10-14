@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; media-src 'self' blob:; connect-src 'none'">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CH8 Control</title><link rel="stylesheet" href="style.css">
+</head><body>
+  <header><div><span class="eyebrow">CH8 / CONTROL</span><h1>Uma pergunta. Todo o contexto.</h1></div><button id="close" aria-label="Fechar">Fechar · Esc</button></header>
+  <main>
+    <div id="autonomy-status" role="status" aria-live="polite">Modo autônomo: consultando o Control…</div>
+    <div id="status" role="status" aria-live="polite">Escreva sua pergunta para o Control.</div>
+    <form id="form"><label for="question">Sua pergunta ou mensagem</label>
+      <textarea id="question" rows="4" maxlength="8000" placeholder="O que você quer saber sobre as empresas e os projetos?"></textarea>
+      <div class="actions"><span>Enter envia · Shift + Enter quebra a linha</span><button id="send" type="submit">Enviar ao Control →</button></div>
+    </form>
+    <section id="result" hidden><div class="answer-heading"><h2>Resposta do Control</h2><button id="copy">Copiar resposta</button></div><article id="answer" tabindex="0"></article></section>
+  </main>
+  <footer>Q: voz · T: texto · A: ligar/desligar autonomia · +/−: ajustar nível<br>Combinação: Ctrl + Alt + Win (Shift opcional no macropad)</footer>
+  <script src="renderer.js"></script>
+</body></html>
