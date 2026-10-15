@@ -18,6 +18,7 @@ MUTEX_NAME = "Local\\TecladoAlloetMacropad"
 # VK da letra que o macropad manda junto com Ctrl+Shift (ou Ctrl+Alt para H/Y).
 APPS = {
     0x43: ("CH8 Control", "https://control.ch8ai.com.br", None),  # Shift+Win+C
+    0x5A: ("Monitor e CHControl", ("https://monitor.ch8ai.com.br/", "https://chcontrol.ch8ai.com.br/"), None),  # Shift+Win+Z
     0x47: ("Grok Bot", "desktop", None),  # Ctrl+G
     0x4F: ("ChatGPT", r"C:\Users\hudson.santos\AppData\Local\Microsoft\WindowsApps\chatgpt-classic.exe", None),  # Ctrl+Shift+O
     0x4B: ("Claude", r"C:\Users\hudson.santos\AppData\Local\Microsoft\WindowsApps\claude-desktop.exe", None),  # Ctrl+Shift+K
@@ -161,6 +162,10 @@ def open_desktop(name):
 
 
 def open_app(name, target, params):
+    if isinstance(target, tuple):
+        for url in target:
+            open_app(name, url, params)
+        return
     if name in DESKTOP:
         open_desktop(name)
         return
@@ -218,7 +223,7 @@ def on_event(msg, data):
     is_nino = data.vkCode in (0x48, 0x59)  # H ou Y
     if is_nino and msg in PRESS_MESSAGES and (ctrl or alt):
         log(f"Atalho Nino: VK={data.vkCode:02X}, Ctrl={bool(ctrl)}, Alt={bool(alt)}")
-    if data.vkCode == 0x43:
+    if data.vkCode in (0x43, 0x5A):
         win = (user32.GetAsyncKeyState(0x5B) | user32.GetAsyncKeyState(0x5C)) & 0x8000
         if not (win and shift):
             return True

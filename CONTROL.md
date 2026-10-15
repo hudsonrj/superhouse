@@ -3,6 +3,7 @@
 - **Ctrl + Alt + Shift + Win + T** abre a caixa de pergunta. Enter envia; Shift + Enter quebra a linha. A resposta aparece formatada.
 - **Ctrl + Alt + Shift + Win + Q** inicia a gravação. Aguarde a indicação **Gravando**, fale segurando Q e solte para transcrever, consultar o Control e ouvir a resposta. A resposta também aparece escrita.
 - **Shift + Win + C** abre https://control.ch8ai.com.br.
+- **Shift + Win + Z** abre https://monitor.ch8ai.com.br/ e https://chcontrol.ch8ai.com.br/ no navegador padrão.
 
 Q/T/A também aceitam Ctrl + Alt + Win sem Shift, conforme os sinais observados no macropad.
 

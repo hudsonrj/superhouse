@@ -97,3 +97,26 @@ keys.update({0x11: 0x8000, 0x12: 0x8000, 0x10: 0x8000})
 for vk in (0x41, 0x51, 0x54):
     assert namespace['on_event'](256, types.SimpleNamespace(vkCode=vk)) is True
 print('Giratorio Ctrl+Alt++ aumenta e Ctrl+Alt+- diminui verificado; A/Q/T continuam exigindo Win.')
+
+keys.clear()
+z = types.SimpleNamespace(vkCode=0x5A)
+for win_key in (0x5B, 0x5C):
+    keys.update({0x10: 0x8000, win_key: 0x8000})
+    namespace['_last_fire'].clear()
+    count = len(launched)
+    assert namespace['on_event'](256, z) is False
+    assert namespace['on_event'](256, z) is False
+    assert namespace['on_event'](257, z) is False
+    assert len(launched) == count + 1
+    assert launched[-1][1] == ('https://monitor.ch8ai.com.br/', 'https://chcontrol.ch8ai.com.br/')
+    keys.clear()
+for modifiers in ({}, {0x10: 0x8000}, {0x5B: 0x8000}):
+    keys.clear(); keys.update(modifiers)
+    assert namespace['on_event'](256, z) is True
+opened = []
+open_function = next(n for n in source.body if isinstance(n, ast.FunctionDef) and n.name == 'open_app')
+open_namespace = dict(DESKTOP={}, shell32=types.SimpleNamespace(ShellExecuteW=lambda *args: opened.append(args[2]) or 33), log=logs.append)
+exec(compile(ast.Module(body=[open_function], type_ignores=[]), '<open_app>', 'exec'), open_namespace)
+open_namespace['open_app'](*launched[-1])
+assert opened == ['https://monitor.ch8ai.com.br/', 'https://chcontrol.ch8ai.com.br/']
+print('Shift+Win+Z: duas URLs, ambas as teclas Win, modificadores e repeticao verificados.')
