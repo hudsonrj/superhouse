@@ -8,4 +8,4 @@ O carregamento frio do modelo pode levar varios minutos. A requisicao de carga a
 
 Para escolher outro modelo de retomada, carregue-o no Atomic Chat e rode `node scripts/ensure-atomic.js --capture`. Para remover a inicializacao do Nino: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/install-windows-startup.ps1 -Remove`.
 
-A inicializacao exige login, esta pasta, Node/Electron e a instalacao atual do Atomic Chat. Nao instala Hermes como servico: ele ainda nao esta integrado ao Nino. Pi e agente da ponte sao servicos externos. Se o IP LAN mudar, atualize a configuracao do Atom e seu firmware quando necessario.
+A inicializacao exige login, esta pasta, Node/Electron e a instalacao atual do Atomic Chat. Nao instala Hermes como servico. O codigo atual tem uma rota local Hermes em `src/main/hermes.js`, dependente da instalacao externa do agente; essa rota nao e provisionada por este startup. Pi e agente da ponte sao servicos externos. Se o IP LAN mudar, atualize a configuracao do Atom e seu firmware quando necessario. Veja tambem o [guia Superhouse](../GUIA-SUPERHOUSE.md).

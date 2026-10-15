@@ -18,8 +18,12 @@ Cada mensagem da ponte inclui identificador e instrucoes para acompanhar todas
 as empresas/fontes ja autorizadas, priorizar mencoes, mensagens diretas, emails
 urgentes e decisoes pendentes e avisar Hudson pelos canais mobile ja autorizados.
 O agente deve agrupar por empresa, evitar duplicacoes e informar acessos ausentes.
-Responder a terceiros ou executar decisoes requer aprovacao. As verificacoes
-sao disparadas pelo Nino; nenhuma rotina recorrente adicional e criada na nuvem.
+O evento de ausencia nao concede autorizacao para responder a terceiros nem
+executar decisoes. Respostas automaticas exigem confirmacao do estado manual
+vigente no Control, respeitando nivel, revisao e validade; decisoes fora desse
+escopo continuam exigindo aprovacao. As verificacoes sao disparadas pelo Nino;
+nenhuma rotina recorrente adicional e criada na nuvem. Veja a [politica de
+autonomia](../../docs/OPERACAO.md).
 
 Aceitacao HTTP do webhook confirma envio, nao confirma execucao do GrokBot ou
 entrega mobile. Falhas nao sao repetidas imediatamente; consulte os logs privados

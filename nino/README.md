@@ -1,5 +1,7 @@
 # 🐣 Nino — mascote-assistente flutuante
 
+> **Integração Superhouse:** consulte o [guia atual do componente](GUIA-SUPERHOUSE.md) e o [manual geral](../docs/README.md) para instalação Windows, relação com teclado/Atom/Control e limitações. Este README conserva também procedimentos e explicações históricas de outras modalidades.
+
 Um mascote que fica **flutuando sobre as janelas**, conversa por **texto e voz**,
 **ouve pelo microfone** e aprende com os **seus documentos e livros**.
 

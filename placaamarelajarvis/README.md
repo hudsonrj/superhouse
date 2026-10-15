@@ -1,5 +1,7 @@
 # Placa Amarela
 
+> **Superhouse:** o [guia de integração](GUIA-SUPERHOUSE.md) distingue firmware LVGL, gateway, Atlas e outras variantes, e descreve as dependências reais do build. Para arquitetura, instalação e operação conjunta, comece pelo [manual geral](../docs/README.md).
+
 Companion CONTROL para a Cheap Yellow Display **ESP32-2432S028R** (320×240, LVGL).
 
 Repositório para clonar em outro PC, subir o gateway e gravar o firmware.
