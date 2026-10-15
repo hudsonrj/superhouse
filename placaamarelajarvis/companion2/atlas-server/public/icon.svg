@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Placa Amarela">
+  <rect width="64" height="64" rx="10" fill="#231e18"/>
+  <rect x="6" y="8" width="52" height="48" rx="4" fill="#f0c419" stroke="#16110a" stroke-width="3"/>
+  <circle cx="14" cy="16" r="3" fill="#5c4a2a"/>
+  <circle cx="50" cy="16" r="3" fill="#5c4a2a"/>
+  <circle cx="14" cy="48" r="3" fill="#5c4a2a"/>
+  <circle cx="50" cy="48" r="3" fill="#5c4a2a"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="22" fill="#16110a">PA</text>
+</svg>

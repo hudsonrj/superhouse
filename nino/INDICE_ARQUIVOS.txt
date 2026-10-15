@@ -1,0 +1,222 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║             📚 ÍNDICE DE ARQUIVOS - NINO + ATOMIC CHAT                          ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+🎯 COMECE AQUI:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. SETUP_CHECKLIST.txt
+     └─ ✅ Passo a passo visual da instalação
+        Abra este arquivo primeiro para seguir os passos!
+
+  2. setup-atomic.bat (Windows)
+     └─ Instala Piper (voz) + Whisper (transcrição)
+        Duplo clique para começar
+
+  3. run-atomic.bat (Windows) ou run-atomic.sh (Linux/Mac)
+     └─ Inicia o servidor Nino
+        Duplo clique (bat) ou execute no terminal (sh)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 DOCUMENTAÇÃO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ATOMIC_CHAT.md
+  ├─ Guia completo de uso do Nino com Atomic Chat
+  ├─ Setup detalhado
+  ├─ Troubleshooting
+  ├─ Performance esperada
+  └─ Comparação com Ollama
+
+  MODIFICACOES_TECNICAS.md
+  ├─ Mudanças no código
+  ├─ Arquitetura da integração
+  ├─ Endpoints mapeados
+  ├─ Detalhes técnicos
+  └─ Para desenvolvedores
+
+  README.md
+  └─ Documentação original do Nino
+     (Guia Ollama + WSL + Linux)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔧 SCRIPTS DE INICIALIZAÇÃO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ⚙️ SETUP (primeira vez)
+  ├─ setup-atomic.bat          Windows
+  ├─ setup-atomic.sh           Linux/Mac
+  └─ O que faz: instala Piper + Whisper + ícones
+     Tempo: ~10-15 minutos
+
+  🚀 INICIALIZAR (toda vez)
+  ├─ run-atomic.bat            Windows
+  ├─ run-atomic.sh             Linux/Mac
+  ├─ npm run web               (alternativa)
+  └─ O que faz: inicia servidor em http://127.0.0.1:3081
+
+  🌐 ORIGINAIS (para referência)
+  ├─ Nino.bat                  Windows nativo (Electron + WSL)
+  ├─ mascote.sh                Linux desktop
+  ├─ nino-web.sh               Modo web (Ollama)
+  └─ Use para saber como rodar SEM Atomic Chat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 TESTES E DIAGNÓSTICO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  test-atomic.js
+  ├─ Testa conexão com Atomic Chat
+  ├─ Execução: node test-atomic.js
+  ├─ Resultado esperado:
+  │  ✅ Conexão bem-sucedida!
+  │  ✅ Modelo: AtomicChat/Ornith-1_5-9B-AD-IQ4_XS
+  │  ✅ Chat endpoint respondendo
+  └─ Use para diagnóstico
+
+  npm run test
+  ├─ Smoke test do Nino (com Ollama)
+  └─ Funciona com Atomic Chat também
+
+  npm run web
+  ├─ Inicia servidor (sem precisar de bat/sh)
+  └─ Atalho para run-atomic.bat/sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 CÓDIGO MODIFICADO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  src/main/ollama.js
+  ├─ ✏️  MODIFICADO para suportar OpenAI-compatible
+  ├─ Detecta automaticamente Atomic Chat vs Ollama
+  ├─ Mudanças:
+  │  • streamJson() → suporta SSE + NDJSON
+  │  • ping() → GET /v1/models (OpenAI)
+  │  • listModels() → formatos diferentes
+  │  • embed() → desabilitado para OpenAI
+  │  • chatStream() → 2 implementações separadas
+  └─ Backward compatible com Ollama ✅
+
+  src/main/chat.js
+  src/server/web.js
+  └─ ✅ SEM ALTERAÇÃO (funcionam automaticamente)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🗂️  ESTRUTURA DO PROJETO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  nino/
+  ├─ src/
+  │  ├─ main/
+  │  │  ├─ ollama.js ...................... ✏️ MODIFICADO
+  │  │  ├─ chat.js
+  │  │  ├─ kb.js
+  │  │  ├─ tts.js
+  │  │  ├─ stt.js
+  │  │  └─ config.js
+  │  ├─ server/
+  │  │  └─ web.js ......................... servidor HTTP
+  │  └─ renderer/
+  │     └─ (interface HTML/CSS/JS)
+  │
+  ├─ data/ ................................ dados locais
+  ├─ vendor/ .............................. binários
+  ├─ scripts/ ............................. utilitários
+  │
+  ├─ 📄 ATOMIC_CHAT.md ..................... documentação
+  ├─ 📄 MODIFICACOES_TECNICAS.md ......... detalhes técnicos
+  ├─ 📄 SETUP_CHECKLIST.txt .............. passo a passo
+  ├─ 📄 INDICE_ARQUIVOS.txt .............. este arquivo
+  │
+  ├─ 🔧 setup-atomic.bat .................. instalar (Windows)
+  ├─ 🔧 setup-atomic.sh ................... instalar (Linux)
+  ├─ 🔧 run-atomic.bat .................... rodar (Windows)
+  ├─ 🔧 run-atomic.sh ..................... rodar (Linux)
+  ├─ 🔧 test-atomic.js .................... teste
+  │
+  ├─ package.json ......................... dependências
+  └─ README.md ............................ original
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💾 DADOS E CONFIGURAÇÃO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Depois de rodar:
+
+  data/
+  ├─ settings.json ..................... suas preferências
+  ├─ kb/
+  │  └─ index.json ..................... base local (não usado com Atomic)
+  ├─ audio/ ............................ gravações temporárias
+  └─ models/whisper/ ................... modelo de transcrição
+
+  vendor/
+  ├─ piper/ ............................ voz neural
+  ├─ voices/ ........................... vozes PT-BR
+  └─ sttenv/ ........................... Python + Whisper
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚦 FLUXO DE USO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1️⃣  PRIMEIRA VEZ
+      └─ execute: setup-atomic.bat
+         Instala dependências (Piper, Whisper)
+         ⏱️  ~10-15 minutos
+
+  2️⃣  SEMPRE (antes de usar)
+      └─ Certifique-se que Atomic Chat está rodando
+         http://127.0.0.1:1337/v1/models
+
+  3️⃣  ADICIONAR DOCUMENTOS
+      └─ No Atomic Chat: crie projeto + adicione PDFs/TXTs
+         Deixe indexar
+
+  4️⃣  RODAR O NINO
+      └─ execute: run-atomic.bat
+         ou: npm run web
+         Aguarde: "Servidor rodando em http://127.0.0.1:3081"
+
+  5️⃣  USAR NO NAVEGADOR
+      └─ Chrome/Edge → http://127.0.0.1:3081
+         Clique 🪟 para janela flutuante
+         Converse!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ DÚVIDAS?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Leia em ordem:
+  1. SETUP_CHECKLIST.txt ......... começar
+  2. ATOMIC_CHAT.md .............. como usar
+  3. MODIFICACOES_TECNICAS.md .... como funciona
+  4. README.md ................... original (Ollama)
+
+  Testar:
+  └─ node test-atomic.js ......... diagnóstico
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ STATUS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ✅ Código adaptado para Atomic Chat
+  ✅ Scripts de setup criados
+  ✅ Scripts de inicialização criados
+  ✅ Testes de conexão funcionando
+  ✅ Documentação completa
+  ✅ Pronto para usar!
+
+  Próximo passo: execute setup-atomic.bat
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+Bom uso! 🚀

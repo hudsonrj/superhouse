@@ -1,0 +1,57 @@
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# local agent / IDE
+.grok/
+.cursor/
+.claude/
+.codex/
+.gemini/
+.kiro/
+.windsurf/
+.agents/
+.adal/
+.vscode/
+.mcp.json
+
+# secrets — copy on the other machine, never commit
+.env
+.kiosk_token
+**/.kiosk_token
+
+# python / logs / audio
+**/__pycache__/
+*.pyc
+*.pcm
+*.log
+
+# firmware build artifacts
+*.o
+*.d
+*.elf
+*.map
+*.a
+companion2/firmware-cyd/atlas_cyd/build/
+companion2/firmware-cyd/atlas_lvgl/build/
+companion2/firmware-cyd/build/
+companion2/firmware-cyd/build-atlas/
+companion2/firmware-cyd/build-flash/
+companion2/firmware-cyd/diario/
+companion2/firmware-cyd/last_tts.pcm
+companion2/firmware-cyd/compile.txt
+companion2/firmware-cyd/compile.log
+
+# ESP-IDF / xiaozhi build trees
+companion2/build/
+companion2/build-lichuang/
+companion2/managed_components/
+companion2/flash-backups/
+companion2/sdkconfig
+sdkconfig.old
+build-cyd/
+
+# junk
+.DS_Store
+.cache
+stuck-command.txt
+

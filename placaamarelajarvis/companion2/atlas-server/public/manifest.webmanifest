@@ -1,0 +1,18 @@
+{
+  "name": "Meu Sistema de Vida",
+  "short_name": "Placa Amarela",
+  "description": "Console de regulação e descoberta pessoal. Local, sem diagnóstico, um passo por vez.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#231e18",
+  "theme_color": "#f0c419",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

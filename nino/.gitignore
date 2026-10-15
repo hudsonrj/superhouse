@@ -1,0 +1,40 @@
+node_modules/
+
+# Ambiente Python desta máquina: o shebang aponta para o caminho local
+# e o setup recria na outra máquina.
+vendor/sttenv/
+
+# Livros ainda protegidos por direito autoral, e o índice que guarda o
+# texto deles. Ficam só nesta máquina.
+data/uploads/
+data/kb/
+
+# Travas temporárias do cache do Hugging Face.
+data/models/whisper/.locks/
+data/models/whisper/**/*.lock
+
+# Segredos. O cofre fica em ~/.config/nino/credenciais.json, fora do
+# repositório; estas linhas são só uma rede de segurança para quem apontar
+# NINO_CONFIG_DIR para dentro do projeto.
+credenciais.json
+.config/
+
+*.log
+.DS_Store
+
+__pycache__/
+*.pyc
+
+# Atom: credenciais locais, gravacoes e compilacao.
+firmware/atom-voice/include/secrets.h
+firmware/atom-voice/.pio/
+data/atom-config.json
+data/atom/
+vendor/piper-windows.zip
+vendor/piper-windows/
+data/models/whisper-windows/
+data/ch8-config.json
+data/ponte-config.json
+data/checkpoints/
+data/startup/
+data/hermes/

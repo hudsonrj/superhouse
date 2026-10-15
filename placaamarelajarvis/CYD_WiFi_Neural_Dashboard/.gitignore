@@ -1,0 +1,12 @@
+# Arduino build output
+build/
+*.bin
+*.elf
+*.hex
+*.map
+
+# Local editor and credential files
+.idea/
+.vscode/
+secrets.h
+credentials.h

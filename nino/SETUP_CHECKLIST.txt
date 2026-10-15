@@ -1,0 +1,157 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                  ✅ NINO + ATOMIC CHAT - SETUP CHECKLIST                        ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+📋 REQUISITOS VERIFICADOS:
+  ✅ Repositório nino clonado
+  ✅ npm install concluído
+  ✅ Atomic Chat rodando em http://127.0.0.1:1337/v1
+  ✅ Modelo carregado: AtomicChat/Ornith-1_5-9B-AD-IQ4_XS
+  ✅ API respondendo em /v1/chat/completions (OpenAI-compatible)
+
+📦 ARQUIVOS CRIADOS:
+  ✅ src/main/ollama.js               → Adaptado para OpenAI-compatible API
+  ✅ run-atomic.bat                   → Iniciar Nino (Windows)
+  ✅ run-atomic.sh                    → Iniciar Nino (Linux/Mac)
+  ✅ setup-atomic.bat                 → Instalar dependências (Windows)
+  ✅ setup-atomic.sh                  → Instalar dependências (Linux/Mac)
+  ✅ test-atomic.js                   → Testar conexão
+  ✅ ATOMIC_CHAT.md                   → Documentação completa
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🚀 PRÓXIMOS PASSOS:
+
+1️⃣  INSTALAR DEPENDÊNCIAS (primeira vez)
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [ ] Abra: setup-atomic.bat
+
+        Instala:
+        • Piper (voz neural PT-BR)
+        • Whisper (transcrição de voz)
+        • Ícones da aplicação
+
+    Tempo: ~10-15 minutos (depende de internet)
+    Tamanho: ~500 MB
+
+2️⃣  PREPARAR BASE DE CONHECIMENTO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    No Atomic Chat (http://127.0.0.1:1337):
+    [ ] Crie um novo projeto
+    [ ] Adicione seus documentos (PDFs, TXT, DOCX, etc)
+    [ ] Deixe a indexação terminar
+
+    Formatos suportados:
+    • PDF (texto, não scans)
+    • TXT, Markdown
+    • DOCX (Word)
+    • EPUB
+    • HTML
+    • CSV
+    • RTF
+    • ODT
+
+3️⃣  INICIAR O NINO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Escolha uma opção:
+
+    OPÇÃO A (mais fácil):
+    [ ] Duplo clique em: run-atomic.bat
+
+    OPÇÃO B (terminal):
+    [ ] Abra PowerShell nesta pasta
+    [ ] Execute: npm run web
+
+    Aguarde aparecer: "🌐 Servidor rodando em http://127.0.0.1:3081"
+
+4️⃣  ABRIR NO NAVEGADOR
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [ ] Abra Chrome ou Edge
+    [ ] Vá para: http://127.0.0.1:3081
+    [ ] Clique em 🪟 (para janela flutuante)
+    [ ] Converse!
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+💬 TESTANDO A INTEGRAÇÃO:
+
+No terminal, execute:
+  node test-atomic.js
+
+Esperado:
+  ✅ Conexão bem-sucedida!
+  ✅ Modelos disponíveis: AtomicChat/Ornith-1_5-9B-AD-IQ4_XS
+  ✅ Chat endpoint respondendo
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+⚡ PERFORMANCE ESPERADA (sem GPU):
+
+  • Primeira palavra de resposta:     ~3-5 segundos
+  • Resposta completa (30 tokens):   ~8-15 segundos
+  • Transcrição (5s de áudio):       ~3-5 segundos
+  • Síntese de fala:                 tempo real
+
+  👉 Atomic Chat é 5-10× mais rápido que Ollama!
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🎤 FUNCIONALIDADES DISPONÍVEIS:
+
+  ✅ Conversa por texto
+  ✅ Síntese de voz (Piper PT-BR neural)
+  ✅ Reconhecimento de voz (Whisper)
+  ✅ RAG / Base de conhecimento (Atomic Chat)
+  ✅ Visão (câmera) se Atomic Chat suportar
+  ✅ Captura de tela se Atomic Chat suportar
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🔧 TROUBLESHOOTING RÁPIDO:
+
+❌ "Conexão recusada no Atomic Chat"
+   → Verifique: curl http://127.0.0.1:1337/v1/models
+   → Se der erro, inicie Atomic Chat
+
+❌ "Não ouço a voz"
+   → Clique uma vez na página (navegador exige interação)
+   → Teste em ⚙️ → Saída de áudio → "Testar a voz agora"
+
+❌ "Não reconhece voz"
+   → Verifique nível do microfone (barrinhas em "ouvindo…")
+   → Ajuste em Configurações → Som → Entrada
+
+❌ "Resposta vazia ou genérica"
+   → Verifique se documentos foram adicionados ao projeto Atomic
+   → Reinicie o Nino
+   → Tente pergunta relacionada aos documentos
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTAÇÃO:
+
+  • Leia: ATOMIC_CHAT.md (guia completo)
+  • Teste: npm run test (smoke test)
+  • Debug: node test-atomic.js (diagnóstico)
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+🎯 PASSO A PASSO FINAL:
+
+1. Execute: setup-atomic.bat
+   ↓
+2. Aguarde instalação
+   ↓
+3. Adicione documentos no Atomic Chat
+   ↓
+4. Execute: run-atomic.bat
+   ↓
+5. Abra Chrome → http://127.0.0.1:3081
+   ↓
+6. Clique 🪟 para modo flutuante
+   ↓
+7. Converse! 🚀
+
+═══════════════════════════════════════════════════════════════════════════════════
+
+Bom uso! 🎉

@@ -1,0 +1,28 @@
+{
+  "name": "mascote-assistente",
+  "version": "0.1.0",
+  "description": "Assistente-mascote flutuante com voz, texto e base de conhecimento local",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox",
+    "dev": "electron . --no-sandbox --enable-logging",
+    "web": "node src/server/web.js",
+    "test": "node scripts/smoke-test.js",
+    "test:jev": "node scripts/test-jev.js",
+    "test:google": "node scripts/test-google.js",
+    "test:intencoes": "node scripts/test-intencoes.js",
+    "test:dia": "node scripts/test-dia.js",
+    "test:ui": "electron --no-sandbox scripts/ui-preview.js /tmp/nino-ui"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.6.1",
+    "cheerio": "^1.2.0",
+    "mammoth": "^1.12.3",
+    "pdfjs-dist": "^6.3.289"
+  },
+  "devDependencies": {
+    "electron": "^44.4.5"
+  }
+}
