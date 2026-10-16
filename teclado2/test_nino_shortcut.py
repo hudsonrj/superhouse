@@ -120,3 +120,23 @@ exec(compile(ast.Module(body=[open_function], type_ignores=[]), '<open_app>', 'e
 open_namespace['open_app'](*launched[-1])
 assert opened == ['https://monitor.ch8ai.com.br/', 'https://chcontrol.ch8ai.com.br/']
 print('Shift+Win+Z: duas URLs, ambas as teclas Win, modificadores e repeticao verificados.')
+
+for vk, expected in [(0x52, ('RAGPro', 'https://ragpro.ch8ai.com.br/', None)),
+                     (0x4B, ('Hermes', r'C:\Users\hudson.santos\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Hermes.lnk', None))]:
+    event = types.SimpleNamespace(vkCode=vk)
+    for win_key in (0x5B, 0x5C):
+        keys.clear(); keys.update({0x10: 0x8000, win_key: 0x8000})
+        namespace['_last_fire'].clear()
+        count = len(launched)
+        assert namespace['on_event'](256, event) is False
+        assert namespace['on_event'](256, event) is False
+        assert namespace['on_event'](257, event) is False
+        assert launched[-1] == expected and len(launched) == count + 1
+    for modifiers in ({}, {0x10: 0x8000}, {0x5B: 0x8000}):
+        keys.clear(); keys.update(modifiers)
+        assert namespace['on_event'](256, event) is True
+keys.clear(); keys.update({0x11: 0x8000, 0x10: 0x8000})
+namespace['_last_fire'].clear()
+assert namespace['on_event'](256, types.SimpleNamespace(vkCode=0x4B)) is False
+assert launched[-1] == namespace['APPS'][0x4B] and launched[-1][0] == 'Claude'
+print('Shift+Win+R/K verificados; Ctrl+Shift+K continua abrindo Claude.')

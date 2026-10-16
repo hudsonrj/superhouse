@@ -18,6 +18,7 @@ MUTEX_NAME = "Local\\TecladoAlloetMacropad"
 # VK da letra que o macropad manda junto com Ctrl+Shift (ou Ctrl+Alt para H/Y).
 APPS = {
     0x43: ("CH8 Control", "https://control.ch8ai.com.br", None),  # Shift+Win+C
+    0x52: ("RAGPro", "https://ragpro.ch8ai.com.br/", None),  # Shift+Win+R
     0x5A: ("Monitor e CHControl", ("https://monitor.ch8ai.com.br/", "https://chcontrol.ch8ai.com.br/"), None),  # Shift+Win+Z
     0x47: ("Grok Bot", "desktop", None),  # Ctrl+G
     0x4F: ("ChatGPT", r"C:\Users\hudson.santos\AppData\Local\Microsoft\WindowsApps\chatgpt-classic.exe", None),  # Ctrl+Shift+O
@@ -216,6 +217,8 @@ def on_event(msg, data):
     ctrl = user32.GetAsyncKeyState(0x11) & 0x8000
     shift = user32.GetAsyncKeyState(0x10) & 0x8000
     alt = user32.GetAsyncKeyState(0x12) & 0x8000
+    win = (user32.GetAsyncKeyState(0x5B) | user32.GetAsyncKeyState(0x5C)) & 0x8000
+    is_hermes = data.vkCode == 0x4B and win and shift
     # A KEY1 do macropad emite Ctrl+G (sem Shift). As demais teclas
     # continuam usando Ctrl+Shift para evitar alterar seus atalhos atuais.
     # Nino usa Ctrl+Alt+H ou Ctrl+Alt+Y.
@@ -223,8 +226,7 @@ def on_event(msg, data):
     is_nino = data.vkCode in (0x48, 0x59)  # H ou Y
     if is_nino and msg in PRESS_MESSAGES and (ctrl or alt):
         log(f"Atalho Nino: VK={data.vkCode:02X}, Ctrl={bool(ctrl)}, Alt={bool(alt)}")
-    if data.vkCode in (0x43, 0x5A):
-        win = (user32.GetAsyncKeyState(0x5B) | user32.GetAsyncKeyState(0x5C)) & 0x8000
+    if data.vkCode in (0x43, 0x52, 0x5A) or is_hermes:
         if not (win and shift):
             return True
     elif not ctrl:
@@ -241,7 +243,7 @@ def on_event(msg, data):
         now = time.monotonic()
         if now - _last_fire.get(data.vkCode, 0) >= 0.6:
             _last_fire[data.vkCode] = now
-            name, target, params = APPS[data.vkCode]
+            name, target, params = ("Hermes", r"C:\Users\hudson.santos\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Hermes.lnk", None) if is_hermes else APPS[data.vkCode]
             threading.Thread(
                 target=open_app, args=(name, target, params), daemon=True
             ).start()

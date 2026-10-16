@@ -27,6 +27,8 @@ Essas dependências são parciais. Abrir um site não exige o modelo local. Q/T 
 | Ctrl+Shift+L | Abre/focaliza Cursor |
 | Ctrl+Alt+H ou Ctrl+Alt+Y | Abre Nino |
 | Shift+Win+C | Abre `https://control.ch8ai.com.br` |
+| Shift+Win+R | Abre `https://ragpro.ch8ai.com.br/` |
+| Shift+Win+K | Abre Hermes pelo atalho instalado no Windows |
 | Shift+Win+Z | Abre `https://monitor.ch8ai.com.br/` e `https://chcontrol.ch8ai.com.br/` |
 | Ctrl+Alt+Shift+Win+T | Caixa de pergunta por texto |
 | Ctrl+Alt+Shift+Win+Q | Grava enquanto Q estiver pressionado; ao soltar, processa e fala |

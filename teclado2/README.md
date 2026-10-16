@@ -36,6 +36,8 @@ Para os atalhos de texto/voz, instale também o Nino no caminho esperado, com `n
 A tabela completa está em [Operação](../docs/OPERACAO.md). Os principais:
 
 - Shift+Win+C abre Control.
+- Shift+Win+R abre RAGPro.
+- Shift+Win+K abre Hermes; Ctrl+Shift+K continua abrindo Claude.
 - Shift+Win+Z abre Monitor e CHControl pelo navegador padrão.
 - Ctrl+Alt+Shift+Win+T abre texto: Enter envia, Shift+Enter quebra linha.
 - Ctrl+Alt+Shift+Win+Q grava enquanto Q estiver pressionado; ao soltar, transcreve, consulta e fala.
