@@ -115,7 +115,9 @@ stateDiagram-v2
     AusenteProvavel --> Desconhecido: Mais de 90 segundos sem sinal
 ```
 
-O PIR detecta movimento, não presença humana garantida. Ausência não liga o modo autônomo e não concede permissão nova para responder a terceiros. O evento manda alertar e exige conferir a autorização vigente antes de qualquer resposta automática.
+O PIR detecta movimento, não presença humana garantida. Na versão atual, uma ausência nova solicita `sensor-absent` ao Control: se não houver modo ativo, ele pode ativar somente o nível neutro 0, com origem `sensor`. Isso não autoriza respostas automáticas a terceiros. A renovação é de 30 segundos, com lease de 90 segundos. No retorno ou desconexão, `sensor-clear` encerra apenas uma ativação ainda pertencente ao sensor. Mudanças manuais prevalecem; desligar manualmente impede reativação no mesmo ciclo de ausência.
+
+Antes de intensificar os alertas, o monitor aguarda o estado confirmado do Control. Se ele estiver desligado ou indisponível, o evento não solicita intensificação nem alertas mobile. A implementação estendida está em `nino/scripts/control-autonomy-server.py`; reinstalar somente o módulo antigo do teclado pode remover essas ações.
 
 ## 6. Placa amarela
 
@@ -162,4 +164,4 @@ sequenceDiagram
     A->>C: Deve conferir estado antes de responder
 ```
 
-O cliente envia heartbeat a cada dois minutos enquanto o modo está ativo. A autorização do servidor vence após cinco minutos sem renovação. Falha de rede não equivale a aprovação. Consulte [Operação](OPERACAO.md) para os níveis e [Configuração](CONFIGURACAO.md) para o contrato.
+O cliente manual envia heartbeat a cada dois minutos; a autorização manual vence após cinco minutos sem renovação. O modo pertencente ao sensor tem lease separado de 90 segundos e não é prolongado pelo heartbeat do teclado. Falha de rede não equivale a aprovação. Consulte [Operação](OPERACAO.md) para os níveis e [Configuração](CONFIGURACAO.md) para o contrato.

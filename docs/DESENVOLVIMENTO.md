@@ -56,6 +56,8 @@ Esse teste usa Electron e serviços simulados para interface, áudio, entrada de
 ```powershell
 Set-Location C:\repositorio\superhouse\nino
 node scripts\test-absence.js
+node scripts\test-sensor-autonomy.js
+python scripts\test-control-absence.py
 node scripts\test-presence.js
 node --test scripts\test-atom.js
 node scripts\test-ch8.js
@@ -64,6 +66,8 @@ node scripts\test-hermes-routing.js
 ```
 
 Há testes adicionais de modelo, Google, JEV, Hermes e gateway. Alguns dependem de instalações/credenciais externas. Revise os arquivos antes de ampliar a execução; não exponha conteúdo de e-mail em um teste de infraestrutura.
+
+`test-sensor-autonomy-live.js` altera brevemente o estado remoto em nível 0 e faz limpeza, recusando começar se já estiver ativo. Não o execute como teste documental: requer autorização operacional e não comprova o PIR físico. O servidor estendido e o instalador SSH do sensor precisam ser mantidos alinhados às alterações do módulo manual para evitar regressão na reinstalação.
 
 ### Placa
 

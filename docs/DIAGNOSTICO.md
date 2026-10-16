@@ -101,6 +101,7 @@ Uma porta aberta não comprova que o modelo respondeu corretamente. Use uma perg
 - **WAV inválido:** formato precisa ser mono, 16-bit, 16 kHz e tamanho válido; não altere só o cabeçalho de um áudio em outro formato.
 - **Texto existe, mas não toca no Atom:** confira `output`, download `/reply/<id>`, alimentação e reprodução física.
 - **Ausência oscila:** confira os heartbeats; mais de 90 s sem sinal suspende inferência, não significa que a pessoa saiu.
+- **`WIFI_REASON_AUTH_EXPIRE` / motivo 2:** use os diagnósticos seriais para revisar autenticação e configuração da rede 2,4 GHz. Firmware gravado com sucesso não comprova associação Wi-Fi; confira se `lastHeartbeat` deixou de ser `null` antes de validar ausência.
 - **Firmware não compila:** confirme hardware Atom Voice/ESP32-PICO-D4 e `platformio.ini`; AtomS3 é outro alvo.
 
 Use o monitor serial a 115200 para obter a etapa da falha. Não apague a flash inteira como primeira medida.

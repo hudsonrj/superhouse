@@ -23,6 +23,8 @@ Esses fatos não equivalem a homologação em outra máquina, teste depois de to
 
 ## Recursos implementados que dependem de fora
 
+**Sensor de ausência:** o código atual sincroniza ativação neutra e prioridade manual com o Control. O registro de verificação física em 15/10/2026 relata firmware gravado na COM20, mas falha de autenticação/conexão Wi-Fi com motivo `WIFI_REASON_AUTH_EXPIRE`; não houve heartbeat confirmado nem validação física do ciclo de dez minutos. Isso está detalhado em [ausência e GrokBot](../nino/docs/ausencia-grokbot.md). Testes simulados ou de API não substituem essa pendência de hardware/rede.
+
 **Conhecimento das empresas:** Q/T consultam o Control; a abrangência depende do contexto e das fontes realmente conectadas ao serviço. O código não comprova acesso universal a todos os projetos nem sincroniza todas as bases locais automaticamente.
 
 **Agentes e canais:** o cliente manda políticas e eventos à ponte. Os agentes devem conferir a autonomia atual antes de responder. A implementação completa desses agentes/canais não está neste repositório; o aceite do webhook não comprova a aplicação da regra nem o envio ao destinatário.

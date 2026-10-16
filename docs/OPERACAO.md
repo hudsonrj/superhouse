@@ -85,6 +85,8 @@ O indicador da interface web do Control consulta o estado a cada cinco segundos;
 
 Não confunda a gravação de dois cliques do Atom com o Q de segurar/soltar. O PIR não inicia gravação. Atividade de voz ou movimento também influencia o acompanhamento de ausência, sem alterar o modo autônomo manual.
 
+Uma ausência nova pode ativar automaticamente **somente o nível neutro 0**, com origem `sensor`, quando não houver modo ativo. A ativação dura enquanto o sensor mantém seu lease de 90 segundos. O retorno ou perda do sensor limpa somente uma ativação que ainda pertence a ele; mudanças manuais sempre prevalecem. O mesmo ciclo não desfaz um desligamento manual. Essa ativação não permite respostas automáticas a terceiros.
+
 ## Estado e tarefas no Windows
 
 ```powershell

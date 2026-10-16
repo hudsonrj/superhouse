@@ -175,6 +175,8 @@ O instalador localiza arquivos dos serviços, instala o módulo Python e o indic
 
 Se solicitar o HTML, informe o **arquivo absoluto** que termina em `/index.html`, por exemplo `/opt/app-unica/novo/index.html` quando esse for realmente o arquivo ativo. Não informe domínio nem apenas a pasta. Após atualizar servidor e cliente para `scaleVersion: 2`, reinicie o ativador local.
 
+Se usar a sincronização do sensor de ausência, aplique depois a extensão mais recente a partir da raiz do Nino: `python scripts/control-autonomy-ssh.py --deploy`. Ela acrescenta propriedade do sensor, prioridade manual e lease de 90 segundos. O instalador original do teclado pode substituir essa extensão ao ser reaplicado; preserve o banco e atualize o módulo do sensor por último. Consulte [Configuração](CONFIGURACAO.md) antes de executar: é atualização de serviço remoto existente, não um teste sem efeitos.
+
 ## 7. Startup do Windows
 
 ### Teclado

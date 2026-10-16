@@ -99,7 +99,9 @@ O áudio enviado é WAV mono 16-bit/16 kHz, até 30 s. O PC faz a inferência; a
 
 O PIR no GPIO32 informa movimento; os sinais periódicos permitem distinguir ausência provável de perda de sensor. Os tempos são 30 s de heartbeat, 90 s para considerar o sensor sem comunicação, dez minutos para ausência provável e cinco minutos entre verificações da ponte durante ausência.
 
-Essa automação só intensifica análise/notificação. Ela não altera a autorização manual de autonomia. O agente precisa conferir o estado atual do Control antes de responder a terceiros. Uma pessoa imóvel pode ser classificada como ausente; mantenha esse limite em mente ao interpretar os alertas.
+Essa automação pode solicitar ao Control uma ativação neutra em nível 0, com origem `sensor`, para análise/notificação, quando não houver modo ativo. Ela renova um lease de 90 segundos a cada 30 segundos. Retorno/desconexão só desliga o estado ainda pertencente ao sensor; alterações manuais têm prioridade e o mesmo ciclo não reativa o modo desligado manualmente. Se a API não confirmar estado ativo, o evento não pede intensificação/alertas mobile. O sensor não concede autorização nova de resposta a terceiros.
+
+Os contratos estão em `src/server/sensor-autonomy.js` e `scripts/control-autonomy-server.py`. O módulo remoto pode ser atualizado com `scripts/control-autonomy-ssh.py --deploy`, em infraestrutura existente e após conferir o destino. Uma reinstalação do módulo antigo do teclado exige reaplicar a extensão de sensor. O agente precisa conferir estado/revisão/validade antes de responder. Uma pessoa imóvel pode parecer ausente.
 
 ## Operação e manutenção
 

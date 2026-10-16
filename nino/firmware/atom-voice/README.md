@@ -2,6 +2,11 @@
 
 Firmware para Atom Voice / ATOM Echo C008-C, ESP32-PICO-D4, microfone SPM1423 e amplificador NS4168. Não usar em AtomS3/VoiceS3R.
 
+Diagnostico USB a 115200: o comando `wifi` busca a rede configurada na banda
+suportada pelo Atom e informa canal/sinal; desconexoes informam o codigo de motivo
+do SDK, sem imprimir senha ou chave. A busca pode interromper momentaneamente a
+conexao; use-a somente para diagnostico. O Atom suporta Wi-Fi de 2,4 GHz.
+
 O Atom grava por botão, envia WAV ao PC pela rede Wi-Fi e recebe a resposta falada do Nino. Whisper, Atomic Chat e Piper rodam no computador. Nenhum serviço STT em nuvem é usado. Depois dos downloads iniciais dos modelos, a conversa pode funcionar sem internet.
 
 ## Configuração local

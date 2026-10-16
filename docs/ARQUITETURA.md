@@ -106,7 +106,8 @@ O atalho Q/T usa diretamente a segunda rota. Não exige que a pergunta tenha o p
 | Política e estado de autonomia | [autonomy.js](../teclado2/control/autonomy.js), [server-autonomy.py](../teclado2/control/server-autonomy.py) |
 | Sessões e roteamento Nino | [chat.js](../nino/src/main/chat.js), [ch8.js](../nino/src/main/ch8.js), [ponte.js](../nino/src/main/ponte.js), [hermes.js](../nino/src/main/hermes.js) |
 | Áudio e documentos | [stt.js](../nino/src/main/stt.js), [tts.js](../nino/src/main/tts.js), [kb.js](../nino/src/main/kb.js) |
-| Atom e ausência | [atom.js](../nino/src/server/atom.js), [absence.js](../nino/src/server/absence.js) |
+| Atom e ausência | [atom.js](../nino/src/server/atom.js), [absence.js](../nino/src/server/absence.js), [sensor-autonomy.js](../nino/src/server/sensor-autonomy.js) |
+| Autonomia com prioridade manual/sensor | [control-autonomy-server.py](../nino/scripts/control-autonomy-server.py) |
 | Gateway CYD | [placa_gateway.py](../placaamarelajarvis/companion2/firmware-cyd/placa_gateway.py), [cyd_api.py](../placaamarelajarvis/companion2/firmware-cyd/cyd_api.py) |
 
 ## Estado persistente

@@ -89,6 +89,10 @@ function createAtomServer({ token, output = 'atom', directory = path.join(config
       res.end(JSON.stringify(absence.snapshot())); return;
     }
     if (req.url === '/sensor-status' && req.method === 'POST') {
+      if (req.headers['content-type']?.split(';')[0].trim() !== 'application/json' ||
+          !/^\d+$/.test(req.headers['content-length'] || '') || Number(req.headers['content-length']) > 1024) {
+        req.resume(); res.writeHead(400).end('Envie JSON, ate 1 KB.'); return;
+      }
       try {
         const chunks = []; let size = 0;
         for await (const chunk of req) {
@@ -233,7 +237,8 @@ function createAtomServer({ token, output = 'atom', directory = path.join(config
 
 if (require.main === module) {
   const settings = require(path.join(config.DATA_DIR, 'atom-config.json'));
-  const server = createAtomServer({ token: settings.token, output: process.env.NINO_ATOM_OUTPUT || settings.output || 'atom' });
+  const { createSensorAutonomy } = require('./sensor-autonomy');
+  const server = createAtomServer({ token: settings.token, output: process.env.NINO_ATOM_OUTPUT || settings.output || 'atom', absence: createAbsenceMonitor({ control: createSensorAutonomy() }) });
   server.listen(3082, settings.host, () => console.log(`Atom Voice: http://${settings.host}:3082 (Atomic Chat local)`));
   const stop = () => { stt.stopWhisper(); server.close(); };
   process.on('SIGINT', stop);

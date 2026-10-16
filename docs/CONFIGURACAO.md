@@ -102,6 +102,8 @@ Todas as rotas do servidor Atom exigem Bearer com a chave configurada.
 
 O servidor evita duas conversas simultâneas e pode responder `409`. Não tente transformar essa resposta em repetição imediata de uma ação já iniciada.
 
+O estado do sensor inclui também `autonomy`, o último estado confirmado pelo Control. `unavailable: true` indica falha de confirmação; não é autorização para intensificar alertas.
+
 ### CYD
 
 `GET /cyd` fornece o protocolo textual `CTRL/1`. As rotas `/cyd/act`, `/cyd/ask`, `/cyd/rag` e outras adaptam interações para o Control. `GET /health` ajuda a diagnosticar o gateway, mas não comprova áudio, hardware nem execução dos agentes. O token kiosk é lido da configuração privada; confirme a implantação antes de expor essas rotas fora da LAN.
@@ -127,6 +129,12 @@ Esse é um exemplo, não o estado atual da instalação. `level` é inteiro entr
 `POST /autonomy` recebe `action` entre `toggle`, `more`, `less` ou `heartbeat`, com `requestId` UUID. O servidor deduplica por id, limita a escala e altera a revisão quando há mudança de estado. O giro não liga o modo. A tecla A alterna o modo e reinicia o nível em 0. Em modo ativo, `less` pode chegar a −3 sem desligar.
 
 O lease é renovado para cinco minutos e o cliente usa heartbeat de dois minutos. Ao expirar, o estado efetivo fica desligado; um heartbeat tardio não restaura a autorização. É necessário ativar novamente. A comparação de revisão e validade deve acontecer antes de cada resposta a terceiros.
+
+### Extensão de presença/ausência
+
+A versão estendida está em [control-autonomy-server.py](../nino/scripts/control-autonomy-server.py). Acrescenta `sensor-absent` com UUID `cycle`, `sensor-clear` e o campo `source` (`sensor`, `manual` ou `none`). Uma ausência nova pode iniciar nível 0 quando não houver modo ativo. O sensor renova a cada 30 segundos um lease de 90 segundos. Seu retorno só desliga uma ativação de sua propriedade; um comando manual transfere prioridade e bloqueia reativação no mesmo ciclo. O heartbeat manual não prolonga o lease de propriedade do sensor.
+
+Para atualizar uma instalação existente após revisar o destino SSH: `python scripts/control-autonomy-ssh.py --deploy`, na raiz do Nino. O script pede senha interativa, mantém backup e reinicia o serviço existente. Sem `--deploy`, ele baixa o módulo remoto para revisão, sobrescrevendo a cópia local do arquivo; não use esse modo inadvertidamente antes de preservar mudanças locais. O instalador antigo do teclado contém a versão manual do módulo: se for reaplicado, reinstale a extensão do sensor depois, preservando o banco.
 
 ## Caminhos fixos a revisar em outra máquina
 

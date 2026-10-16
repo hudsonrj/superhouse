@@ -64,6 +64,8 @@ Os níveis detalhados e seus limites estão em [Operação](../docs/OPERACAO.md)
 
 Se precisar indicar o HTML ativo, use o arquivo absoluto `/.../index.html`. Um domínio não é um caminho do sistema de arquivos. Atualize também o cliente local e reinicie o Electron para não continuar usando código antigo em memória.
 
+Na integração atual com ausência do Nino, há uma versão estendida do módulo em `nino/scripts/control-autonomy-server.py`. Reaplicar o instalador antigo do teclado pode remover as ações do sensor; atualize a extensão em seguida com o procedimento documentado em [Configuração](../docs/CONFIGURACAO.md), preservando o banco.
+
 ## Startup e processo em segundo plano
 
 ```powershell

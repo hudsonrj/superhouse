@@ -192,7 +192,15 @@ void setup() {
   }
   Serial.printf("SPIFFS: %u bytes, %u usados.\n", (unsigned)SPIFFS.totalBytes(), (unsigned)SPIFFS.usedBytes());
   if (SPIFFS.exists("/recording.wav")) SPIFFS.remove("/recording.wav");
+  WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
+  WiFi.disconnect(false, true);
+  WiFi.setSleep(false);
+  WiFi.onEvent([](WiFiEvent_t event, WiFiEventInfo_t info) {
+    if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {
+      Serial.printf("Wi-Fi desconectado: motivo=%u\n", info.wifi_sta_disconnected.reason);
+    }
+  });
   WiFi.setAutoReconnect(true);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 }
@@ -202,6 +210,16 @@ void loop() {
   if (!recordingNow && Serial.available()) {
     String command = Serial.readStringUntil('\n');
     command.trim();
+    if (command == "wifi") {
+      int found = WiFi.scanNetworks();
+      Serial.printf("Wi-Fi: status=%d, redes=%d\n", WiFi.status(), found);
+      for (int index = 0; index < found; index++) {
+        if (WiFi.SSID(index) == WIFI_SSID) {
+          Serial.printf("Rede configurada encontrada: canal=%d sinal=%d\n", WiFi.channel(index), WiFi.RSSI(index));
+        }
+      }
+      WiFi.scanDelete();
+    }
     if (command.startsWith("play /reply/") && command.length() == 48) {
       playReply(command.substring(5));
     }

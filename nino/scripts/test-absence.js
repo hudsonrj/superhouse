@@ -6,7 +6,7 @@ const flush = () => new Promise(resolve => setImmediate(resolve));
 
 test('ausencia em 10 minutos, verificacoes em 5 minutos e retorno sem duplicar', async () => {
   let time = 0; const sent = [];
-  const monitor = createAbsenceMonitor({ now: () => time, send: async text => sent.push(text), report: () => {} });
+  const monitor = createAbsenceMonitor({ now: () => time, send: async text => sent.push(text), report: () => {}, control: async ({ state }) => ({ enabled: state === 'absent', level: 0, revision: 1 }) });
   monitor.tick(); assert.equal(sent.length, 0);
   monitor.heartbeat(true); await flush(); sent.length = 0;
   for (time = 30000; time < 600000; time += 30000) { monitor.heartbeat(false); monitor.tick(); }
@@ -14,7 +14,7 @@ test('ausencia em 10 minutos, verificacoes em 5 minutos e retorno sem duplicar',
   monitor.heartbeat(false); monitor.tick(); await flush();
   assert.equal(monitor.snapshot().state, 'absent'); assert.equal(sent.length, 1);
   assert.match(sent[0], /Estado: absent/); assert.match(sent[0], /Nao responda a terceiros/);
-  assert.match(sent[0], /Este evento nao ativa, desativa nem altera o modo autonomo/);
+  assert.match(sent[0], /Alteracoes manuais prevalecem/);
   assert.match(sent[0], /Com estado desconhecido, expirado ou desativado, nao responda a terceiros/);
   for (time = 630000; time <= 900000; time += 30000) { monitor.heartbeat(false); monitor.tick(); await flush(); }
   assert.equal(sent.length, 2); assert.match(sent[1], /Estado: check/);
@@ -33,6 +33,17 @@ test('sensor desconectado, reinicio e pessoa em movimento nao geram ausencia', a
   assert.equal(monitor.snapshot().state, 'present');
   for (time = 630000; time <= 1300000; time += 30000) { monitor.heartbeat(true); monitor.tick(); }
   await flush(); assert.ok(sent.every(text => !text.includes('Estado: absent')));
+});
+
+test('Control indisponivel bloqueia intensificacao mesmo com ausencia detectada', async () => {
+  let time = 0; const sent = [];
+  const monitor = createAbsenceMonitor({ now: () => time, send: async text => sent.push(text), report: () => {}, control: async () => { throw new Error('offline'); } });
+  monitor.heartbeat(true); await flush(); sent.length = 0;
+  for (time = 30000; time <= 600000; time += 30000) { monitor.heartbeat(false); monitor.tick(); }
+  await flush();
+  assert.equal(monitor.snapshot().state, 'absent');
+  assert.equal(monitor.snapshot().autonomy.unavailable, true);
+  assert.match(sent[0], /nao intensifique/);
 });
 
 test('retorno durante envio pendente nao se perde; falha nao faz reenvio imediato', async () => {
